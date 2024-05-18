@@ -1,0 +1,10 @@
+namespace Nl2Sql.SchemaGenerator.Tests;
+
+public class UnitTest1
+{
+    [Fact]
+    public void Test1()
+    {
+
+    }
+}
