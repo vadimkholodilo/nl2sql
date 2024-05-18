@@ -1,0 +1,15 @@
+syntax = "proto3";
+package nl2sql;
+option csharp_namespace = "Nl2Sql.Api.Services";
+
+service Translator {
+rpc TranslateToSql(TranslateToSqlRequest) returns(TranslateToSqlResponse);
+};
+
+message TranslateToSqlRequest {
+
+};
+
+message TranslateToSqlResponse {
+
+};
