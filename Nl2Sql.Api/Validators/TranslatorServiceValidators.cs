@@ -12,11 +12,9 @@ public class TranslatorServiceValidators : Interceptor
         UnaryServerMethod<TRequest, TResponse> continuation)
     {
         // Since Translator service has only one method, there is no reason to check a method's name.
-        string validationErrors = _validateTranslateToSqlRequest(request as TranslateToSqlRequest);
+        var validationErrors = _validateTranslateToSqlRequest(request as TranslateToSqlRequest);
         if (!string.IsNullOrEmpty(validationErrors))
-        {
             throw new RpcException(new Status(StatusCode.InvalidArgument, validationErrors));
-        }
 
         return continuation(request, context);
     }
@@ -25,22 +23,15 @@ public class TranslatorServiceValidators : Interceptor
     {
         StringBuilder validationErrors = new();
 
-        if (string.IsNullOrEmpty(request.Query))
-        {
-            validationErrors.AppendLine("Query can not be empty");
-        }
+        if (string.IsNullOrEmpty(request.Query)) validationErrors.AppendLine("Query can not be empty");
 
         if (string.IsNullOrEmpty(request.DatabaseSchema))
-        {
             validationErrors.AppendLine("Database schema can not be empty");
-        }
 
         if (!DatabaseProviders.SupportedDatabaseProviders.Contains(request.DatabaseProvider,
                 StringComparer.InvariantCultureIgnoreCase))
-        {
             validationErrors.AppendLine(
-                $"{request.DatabaseProvider} is not a valid database provider. The following database providers are supported {String.Join(", ", DatabaseProviders.SupportedDatabaseProviders)}");
-        }
+                $"{request.DatabaseProvider} is not a valid database provider. The following database providers are supported {string.Join(", ", DatabaseProviders.SupportedDatabaseProviders)}");
 
         return validationErrors.ToString();
     }

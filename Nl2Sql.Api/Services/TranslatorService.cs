@@ -7,8 +7,8 @@ namespace Nl2Sql.Api;
 
 public class TranslatorService : TranslatorBase
 {
-    private readonly ILogger<TranslatorService> _logger;
     private readonly IGptTranslator _gptTranslator;
+    private readonly ILogger<TranslatorService> _logger;
 
     public TranslatorService(ILogger<TranslatorService> logger, IGptTranslator gptTranslator)
     {
@@ -19,9 +19,9 @@ public class TranslatorService : TranslatorBase
     public override async Task<TranslateToSqlResponse> TranslateToSql(TranslateToSqlRequest request,
         ServerCallContext context)
     {
-        string sqlQuery = await _gptTranslator.TranslateFromNaturalLanguageToSql(request.Query,
+        var sqlQuery = await _gptTranslator.TranslateFromNaturalLanguageToSql(request.Query,
             request.DatabaseSchema, request.DatabaseProvider);
-        return new TranslateToSqlResponse()
+        return new TranslateToSqlResponse
         {
             Sql = sqlQuery
         };
