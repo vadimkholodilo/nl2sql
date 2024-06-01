@@ -1,10 +1,12 @@
 using Nl2Sql.Api;
+using Nl2Sql.Api.Gpt;
 using Nl2Sql.Api.Services;
 using Nl2Sql.Api.Validators;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddScoped<IGptTranslator, GptTranslator>();
 builder.Services.AddGrpc()
     .AddServiceOptions<TranslatorService>(options =>
     {

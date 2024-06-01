@@ -1,4 +1,5 @@
 ﻿using Grpc.Core;
+using Nl2Sql.Api.Gpt;
 using Nl2Sql.Api.Services;
 using static Nl2Sql.Api.Services.Translator;
 
@@ -8,10 +9,12 @@ public class TranslatorService : TranslatorBase
 {
 
     private readonly ILogger<TranslatorService> _logger;
-
-    public TranslatorService(ILogger<TranslatorService> logger)
+    private readonly IGptTranslator _gptTranslator;
+    
+    public TranslatorService(ILogger<TranslatorService> logger, IGptTranslator gptTranslator)
     {
         _logger = logger;
+        _gptTranslator = gptTranslator;
     }
 
     public override async Task<TranslateToSqlResponse> TranslateToSql(TranslateToSqlRequest request, ServerCallContext context)
