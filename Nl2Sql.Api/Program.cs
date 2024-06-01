@@ -1,10 +1,15 @@
 using Nl2Sql.Api;
 using Nl2Sql.Api.Services;
+using Nl2Sql.Api.Validators;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddGrpc();
+builder.Services.AddGrpc()
+    .AddServiceOptions<TranslatorService>(options =>
+    {
+        options.Interceptors.Add<TranslatorServiceValidators>();
+    });
 builder.Services.AddGrpcReflection();
 
 var app = builder.Build();

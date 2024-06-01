@@ -7,6 +7,13 @@ namespace Nl2Sql.Api;
 public class TranslatorService : TranslatorBase
 {
 
+    private readonly ILogger<TranslatorService> _logger;
+
+    public TranslatorService(ILogger<TranslatorService> logger)
+    {
+        _logger = logger;
+    }
+
     public override async Task<TranslateToSqlResponse> TranslateToSql(TranslateToSqlRequest request, ServerCallContext context)
     {
         throw new NotImplementedException();
