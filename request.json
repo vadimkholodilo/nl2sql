@@ -1,0 +1,6 @@
+{
+  "query": "Return all users older than 20 years old",
+  "databaseSchema": "CREATE TABLE users(id INT, first_name VARCHAR(255), last_name VARCHAR(255), age int)",
+  "databaseProvider": "postgresql"
+  
+}
