@@ -5,7 +5,7 @@ using Nl2Sql.Api.Validators;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddGptServices();
+builder.Services.AddGptServices(builder.Configuration);
 builder.Services.AddGrpc()
     .AddServiceOptions<TranslatorService>(options => { options.Interceptors.Add<TranslatorServiceValidators>(); });
 builder.Services.AddGrpcReflection();
